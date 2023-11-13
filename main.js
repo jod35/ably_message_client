@@ -1,5 +1,5 @@
 const client = new Ably.Realtime(
-  "Kcalxw.tn6QTw:YBblwRIdBgL9VXgn7KYTg8RQGNEfT3wzsqzALSOXjZU"
+  "your-key"
 );
 const messagesContainer = document.querySelector(".messages");
 const clearButton = document.querySelector("#clear-btn");
@@ -22,11 +22,11 @@ client.connection.on("connect", () => {
   console.log("Connected to Ably");
 });
 
-var channel = client.channels.get("staking");
+var channel = client.channels.get("your-channe-name");
 
 console.log(channel);
 
-channel.subscribe("account_update", (message) => {
+channel.subscribe("the event you want to listen to", (message) => {
   const tree = jsonview.create(message.data);
   const html = `<div class='tree-${message.timestamp}' style="margin-bottom:30px; background-color:lightgray;padding:10px;"></div>`;
   messagesContainer.innerHTML += html;
