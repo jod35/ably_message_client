@@ -1,16 +1,18 @@
-
-
 const client = new Ably.Realtime(
-    'your ably api key'
+  "Kcalxw.tn6QTw:YBblwRIdBgL9VXgn7KYTg8RQGNEfT3wzsqzALSOXjZU"
 );
 const messagesContainer = document.querySelector(".messages");
-const clearButton = document.querySelector("button");
+const clearButton = document.querySelector("#clear-btn");
 
 const clearMessages = () => {
   messagesContainer.innerHTML = "";
+
+  console.log("yes")
 };
 
-clearButton.addEventListener("click", clearMessages());
+clearButton.addEventListener("click",()=>{
+  clearMessages()
+});
 
 // create json tree object
 
@@ -20,11 +22,11 @@ client.connection.on("connect", () => {
   console.log("Connected to Ably");
 });
 
-var channel = client.channels.get("channel_name");
+var channel = client.channels.get("staking");
 
 console.log(channel);
 
-channel.subscribe("event_name", (message) => {
+channel.subscribe("account_update", (message) => {
   const tree = jsonview.create(message.data);
   const html = `<div class='tree-${message.timestamp}' style="margin-bottom:30px; background-color:lightgray;padding:10px;"></div>`;
   messagesContainer.innerHTML += html;
